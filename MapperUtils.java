@@ -17,7 +17,7 @@ public class MapperUtils {
     }
 
     /**
-            * 对象转换为json字符串
+     * 对象转换为json字符串
      * @param entity
      * @return
      */
@@ -30,6 +30,28 @@ public class MapperUtils {
         }
         return "";
 
+    }
+	
+	/**
+     * @MethodName ConvertNodeToPoJo
+     * @Description [ 解析指定节点的数据，返回PoJo ]
+     * @Date 2019/9/18 9:10
+     * @Param [tree, node, tClass]
+     * @return
+     **/
+    public static <T> T ConvertNodeToPoJo(String tree,String node, Class<T> tClass) {
+
+        try {
+            JsonNode treeNode = objectMapper.readTree(tree);
+
+            JsonNode jsonNode = treeNode.get(node);
+
+            return JsonToObject(jsonNode.toString(), tClass);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
